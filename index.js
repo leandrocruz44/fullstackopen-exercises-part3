@@ -50,16 +50,16 @@ app.get('/api/persons/:id', (request, response) => {
 
 
 app.post('/api/persons' , (request, response, next) => {
-    const entry = request.body
-    const newPerson = new Person ({
-      name: entry.name,
-      number: entry.number
+  const entry = request.body
+  const newPerson = new Person ({
+    name: entry.name,
+    number: entry.number
+  })
+  newPerson.save()
+    .then(savedPerson => {
+      response.json(savedPerson)
     })
-    newPerson.save()
-      .then(savedPerson => {
-        response.json(savedPerson)
-      })
-      .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 
